@@ -9,7 +9,34 @@ public class BalanceSheetController {
 		paidUserBalanceSheet.setTotalPayment(paidUserBalanceSheet.getTotalPayment()+amount);
 		for(Split split: splits) {
 			UserBalanceSheet userBalanceSheet= split.getUser().getBalanceSheet();
-			userBalanceSheet.set
+			User currUser=split.getUser();
+			double oweAmount=split.getAmount();
+			
+			if(paidBy.getUserId()==currUser.getUserId()) {
+				paidUserBalanceSheet.setTotalExpense(paidUserBalanceSheet.getTotalExpense()+oweAmount);
+			}else {
+				//update all parameters of paid user
+				paidUserBalanceSheet.setAmountYouGetBack(paidUserBalanceSheet.getAmountYouGetBack()+oweAmount);
+                BalanceSheet userOweBalance;
+				if(paidUserBalanceSheet.getUserVsBalance().containsKey(currUser)) {
+					userOweBalance= paidUserBalanceSheet.getUserVsBalance().get(currUser);
+				}else {
+					userOweBalance=new BalanceSheet();
+				}
+				userOweBalance.setAmountGetBack(userOweBalance.getAmountGetBack()+oweAmount);
+				
+				//amount.update parameters of oweuser
+				userBalanceSheet.setAmountOwe(userBalanceSheet.getAmountOwe()+oweAmount);
+				userBalanceSheet.setTotalExpense(userBalanceSheet.getTotalExpense()+oweAmount);
+				BalanceSheet updatebalancesheet;
+				if(userBalanceSheet.getUserVsBalance().containsKey(paidBy)) {
+					updatebalancesheet=userBalanceSheet.getUserVsBalance().get(paidBy);
+				}else {
+					updatebalancesheet=new BalanceSheet();
+				}
+				updatebalancesheet.setAmountOwe(updatebalancesheet.getAmountOwe()+oweAmount);
+				
+			}
 		}
 	}
 

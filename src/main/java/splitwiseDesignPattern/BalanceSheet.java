@@ -1,18 +1,18 @@
 package splitwiseDesignPattern;
 
 public class BalanceSheet {
-	int amountGetBack;
-	int amountOwe;
-	public int getAmountGetBack() {
+	double amountGetBack;
+	double amountOwe;
+	public double getAmountGetBack() {
 		return amountGetBack;
 	}
-	public int getAmountOwe() {
+	public double getAmountOwe() {
 		return amountOwe;
 	}
-	public void setAmountGetBack(int amountGetBack) {
-		this.amountGetBack = amountGetBack;
+	public void setAmountGetBack(double d) {
+		this.amountGetBack = d;
 	}
-	public void setAmountOwe(int amountOwe) {
+	public void setAmountOwe(double amountOwe) {
 		this.amountOwe = amountOwe;
 	}
 	
